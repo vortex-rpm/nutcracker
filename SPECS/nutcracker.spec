@@ -32,8 +32,11 @@ autoreconf -fvi
 %install
 %makeinstall PREFIX=%{buildroot}
 rm -rf %{buildroot}
+gzip man/%{name}.8
+%{__install} -p -D -m 0755 src/%{name} %{buildroot}%{_sbindir}/%{name}
 %{__install} -p -D -m 0755 scripts/%{name}.init %{buildroot}%{_initrddir}/%{name}
 %{__install} -p -D -m 0644 conf/%{name}.yml %{buildroot}%{_sysconfdir}/%{name}/%{name}.yml
+%{__install} -p -D -m 0644 man/%{name}.8.gz %{buildroot}%{_mandir}/man8/%{name}.8.gz
 
 %post
 /sbin/chkconfig --add %{name}

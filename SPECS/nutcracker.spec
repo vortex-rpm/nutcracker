@@ -26,7 +26,11 @@ autoreconf -fvi
 
 %build
 
+%configure
+%__make
+
 %install
+%makeinstall PREFIX=%{buildroot}
 rm -rf %{buildroot}
 %{__install} -p -D -m 0755 scripts/%{name}.init %{buildroot}%{_initrddir}/%{name}
 %{__install} -p -D -m 0644 conf/%{name}.yml %{buildroot}%{_sysconfdir}/%{name}/%{name}.yml
